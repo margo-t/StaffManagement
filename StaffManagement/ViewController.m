@@ -10,8 +10,11 @@
 #import "Restaurant.h"
 #import "RestaurantManager.h"
 #import "Waiter.h"
+#import "AddWaiterVC.h"
+
 
 static NSString * const kCellIdentifier = @"CellIdentifier";
+
 
 @interface ViewController ()
 @property IBOutlet UITableView *tableView;
@@ -43,6 +46,47 @@ static NSString * const kCellIdentifier = @"CellIdentifier";
     UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:kCellIdentifier forIndexPath:indexPath];
     Waiter *waiter = self.waiters[indexPath.row];
     cell.textLabel.text = waiter.name;
+    
     return cell;
 }
+
+- (IBAction)addBtn:(UIBarButtonItem *)sender {
+    
+}
+
+
+
+//swipe to delete data
+
+-(NSArray *)tableView:(UITableView *)tableView editActionsForRowAtIndexPath:(NSIndexPath *)indexPath {
+    UITableViewRowAction *button = [UITableViewRowAction rowActionWithStyle:UITableViewRowActionStyleDefault title:@"Delete" handler:^(UITableViewRowAction *action, NSIndexPath *indexPath)
+                                    {
+                                        NSLog(@"Action to perform with Button 1");
+                                        UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Wait" message:@"Are you sure you want to delete?  This action cannot be undone." delegate:self cancelButtonTitle:@"Cancel" otherButtonTitles:@"Delete", nil];
+                                        [alert show];
+                                    }];
+    button.backgroundColor = [UIColor redColor];
+
+    return @[button]; //array with the buttons
+}
+
+
+- (void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex{
+    if (buttonIndex == 1){
+        //delete it
+        
+    }
+}
+
+- (void)tableView:(UITableView *)tableView commitEditingStyle:(UITableViewCellEditingStyle)editingStyle forRowAtIndexPath:(NSIndexPath *)indexPath {
+    
+}
+
+- (BOOL)tableView:(UITableView *)tableView canEditRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    return YES; //tableview must be editable
+}
+
+
+
 @end
