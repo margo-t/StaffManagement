@@ -7,7 +7,10 @@
 //
 
 #import <UIKit/UIKit.h>
-
+#include "AppDelegate.h"
+#import <CoreData/CoreData.h>
 @interface AddWaiterVC : UIViewController
+
+@property(weak,nonatomic)AppDelegate *appDelegate;
 
 @end

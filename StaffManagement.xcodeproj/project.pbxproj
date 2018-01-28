@@ -95,18 +95,15 @@
 		651CBBAB1AB4E1CC00F265E8 /* StaffManagement */ = {
 			isa = PBXGroup;
 			children = (
+				651CBBDE1AB4E4AC00F265E8 /* Core Data */,
 				651CBBB01AB4E1CC00F265E8 /* AppDelegate.h */,
 				651CBBB11AB4E1CC00F265E8 /* AppDelegate.m */,
 				651CBBD51AB4E31400F265E8 /* RestaurantManager.h */,
 				651CBBD61AB4E31400F265E8 /* RestaurantManager.m */,
-				651CBBB61AB4E1CD00F265E8 /* ViewController.h */,
-				651CBBB71AB4E1CD00F265E8 /* ViewController.m */,
 				651CBBB91AB4E1CD00F265E8 /* Main.storyboard */,
-				8D64BA49201BF843003C5184 /* AddWaiterVC.h */,
-				8D64BA4A201BF843003C5184 /* AddWaiterVC.m */,
+				8D64BA4C201CEA64003C5184 /* VC */,
 				651CBBBC1AB4E1CD00F265E8 /* Images.xcassets */,
 				651CBBBE1AB4E1CD00F265E8 /* LaunchScreen.xib */,
-				651CBBDE1AB4E4AC00F265E8 /* Core Data */,
 				651CBBAC1AB4E1CC00F265E8 /* Supporting Files */,
 			);
 			path = StaffManagement;
@@ -148,6 +145,17 @@
 				651CBBD91AB4E4A000F265E8 /* Restaurant.m */,
 			);
 			name = "Core Data";
+			sourceTree = "<group>";
+		};
+		8D64BA4C201CEA64003C5184 /* VC */ = {
+			isa = PBXGroup;
+			children = (
+				651CBBB61AB4E1CD00F265E8 /* ViewController.h */,
+				651CBBB71AB4E1CD00F265E8 /* ViewController.m */,
+				8D64BA49201BF843003C5184 /* AddWaiterVC.h */,
+				8D64BA4A201BF843003C5184 /* AddWaiterVC.m */,
+			);
+			name = VC;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */

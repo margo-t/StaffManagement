@@ -14,10 +14,10 @@
         </array>
     </customFonts>
     <scenes>
-        <!--Home-->
+        <!--MainViewController-->
         <scene sceneID="ufC-wZ-h7g">
             <objects>
-                <viewController id="vXZ-lx-hvc" customClass="ViewController" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="MainViewController" title="MainViewController" id="vXZ-lx-hvc" customClass="ViewController" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="jyV-Pf-zRb"/>
                         <viewControllerLayoutGuide type="bottom" id="2fi-mo-0CV"/>
@@ -47,7 +47,6 @@
                         <barButtonItem key="rightBarButtonItem" systemItem="add" id="joS-wv-nKK">
                             <color key="tintColor" white="0.33333333333333331" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                             <connections>
-                                <action selector="addBtn:" destination="vXZ-lx-hvc" id="hNu-Ni-qvB"/>
                                 <segue destination="PLc-4d-leo" kind="show" id="v88-lI-e9U"/>
                             </connections>
                         </barButtonItem>
@@ -76,10 +75,10 @@
                                 <rect key="frame" x="0.0" y="64" width="414" height="672"/>
                                 <subviews>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Avx-53-vaP">
-                                        <rect key="frame" x="42" y="40" width="330" height="612"/>
+                                        <rect key="frame" x="42" y="40" width="330" height="592"/>
                                         <subviews>
-                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Name:" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="7qn-q3-aSy">
-                                                <rect key="frame" x="136.33333333333334" y="41" width="59" height="24"/>
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Info:" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="7qn-q3-aSy">
+                                                <rect key="frame" x="145.66666666666666" y="41" width="39.333333333333343" height="24"/>
                                                 <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="20"/>
                                                 <color key="textColor" white="0.33333333329999998" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                 <nil key="highlightedColor"/>
@@ -109,7 +108,7 @@
                                 <constraints>
                                     <constraint firstItem="Avx-53-vaP" firstAttribute="top" secondItem="OPN-ky-set" secondAttribute="top" constant="40" id="GAH-T4-ofo"/>
                                     <constraint firstItem="Avx-53-vaP" firstAttribute="centerX" secondItem="OPN-ky-set" secondAttribute="centerX" id="HKV-5e-ckG"/>
-                                    <constraint firstAttribute="bottom" secondItem="Avx-53-vaP" secondAttribute="bottom" constant="20" id="XY4-io-s5o"/>
+                                    <constraint firstAttribute="bottom" secondItem="Avx-53-vaP" secondAttribute="bottom" constant="40" id="XY4-io-s5o"/>
                                     <constraint firstItem="Avx-53-vaP" firstAttribute="leading" secondItem="OPN-ky-set" secondAttribute="leading" constant="42" id="e86-RD-U2d"/>
                                 </constraints>
                             </view>
@@ -125,8 +124,14 @@
                     <navigationItem key="navigationItem" title="Add Waiter" id="pcA-tW-Dmo">
                         <barButtonItem key="rightBarButtonItem" systemItem="save" id="erP-rr-AqF">
                             <color key="tintColor" white="0.33333333329999998" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                            <connections>
+                                <action selector="saveBtn:" destination="PLc-4d-leo" id="v70-bS-BZY"/>
+                            </connections>
                         </barButtonItem>
                     </navigationItem>
+                    <connections>
+                        <outlet property="nameField" destination="SIU-8e-1fi" id="dmh-Pp-d9A"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="h5n-lN-BGg" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>

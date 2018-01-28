@@ -50,10 +50,6 @@ static NSString * const kCellIdentifier = @"CellIdentifier";
     return cell;
 }
 
-- (IBAction)addBtn:(UIBarButtonItem *)sender {
-    
-}
-
 
 
 //swipe to delete data
