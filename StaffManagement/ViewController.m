@@ -30,7 +30,17 @@ static NSString * const kCellIdentifier = @"CellIdentifier";
     NSSortDescriptor *sortByName = [[NSSortDescriptor alloc]initWithKey:@"name" ascending:YES];
     self.waiters = [[[RestaurantManager sharedManager]currentRestaurant].staff sortedArrayUsingDescriptors:@[sortByName]];
     NSLog(@"%lu", (unsigned long)self.waiters.count);
-    // Do any additional setup after loading the view, typically from a nib.
+    
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(handle_data) name:@"reload_data" object:nil];
+    
+}
+
+
+-(void)handle_data {
+    NSSortDescriptor *sortByName = [[NSSortDescriptor alloc]initWithKey:@"name" ascending:YES];
+    self.waiters = [[[RestaurantManager sharedManager]currentRestaurant].staff sortedArrayUsingDescriptors:@[sortByName]];
+    [self.tableView reloadData];
+    NSLog(@"reload");
 }
 
 - (void)didReceiveMemoryWarning {

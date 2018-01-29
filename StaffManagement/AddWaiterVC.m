@@ -48,18 +48,16 @@ NSError *error = nil;
     
     if (![_nameField.text isEqualToString:@""]) {
         
-        //NSEntityDescription *restaurantEntity = [NSEntityDescription entityForName:@"Restaurant" inManagedObjectContext:_appDelegate.managedObjectContext];
         NSEntityDescription *waiterEntity = [NSEntityDescription entityForName:@"Waiter" inManagedObjectContext:_appDelegate.managedObjectContext];
-        
         Restaurant *aRestaurant = _currentRes;
-        
-        
         
         Waiter *newWaiter = [[Waiter alloc] initWithEntity:waiterEntity insertIntoManagedObjectContext:_appDelegate.managedObjectContext];
         newWaiter.name = _nameField.text;
         NSLog(@"COME TO SAVING");
         [aRestaurant addStaffObject:newWaiter];
         [_appDelegate.managedObjectContext save:&error];
+        
+        [[NSNotificationCenter defaultCenter] postNotificationName:@"reload_data" object:self];
         
         _nameField.text =@"";
         
