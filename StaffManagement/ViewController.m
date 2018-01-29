@@ -11,10 +11,11 @@
 #import "RestaurantManager.h"
 #import "Waiter.h"
 #import "AddWaiterVC.h"
+#import "StaffManagement-Swift.h"
 
 
 
-static NSString * const kCellIdentifier = @"CellIdentifier";
+static NSString * const kCellIdentifier = @"WaiterCellIdentifier";
 
 
 @interface ViewController ()
@@ -61,6 +62,7 @@ static NSString * const kCellIdentifier = @"CellIdentifier";
     return self.waiters.count;
 }
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
+    
     UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:kCellIdentifier forIndexPath:indexPath];
     Waiter *waiter = self.waiters[indexPath.row];
     cell.textLabel.text = waiter.name;
@@ -68,6 +70,25 @@ static NSString * const kCellIdentifier = @"CellIdentifier";
     return cell;
 }
 
+- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath* )indexPath{
+    //NSObject *post = [self.waiters[indexPath.row] objectAtIndex:indexPath.row];
+    [self performSegueWithIdentifier:@"toSchedule" sender:indexPath];
+}
+
+- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
+
+        if ([[segue identifier] isEqualToString:@"toSchedule"])
+        {
+            
+            NSIndexPath *indexPath = [self.tableView indexPathForSelectedRow];
+            ScheduleTableVC *destViewController = (ScheduleTableVC*)segue.destinationViewController;
+
+            Waiter *waiter = self.waiters[indexPath.row];
+            destViewController.title = waiter.name;
+            destViewController.titleName = waiter.name;
+
+        }
+}
 
 
 //swipe to delete data
