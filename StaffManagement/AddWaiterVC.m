@@ -11,9 +11,12 @@
 #import "Waiter.h"
 #import "Restaurant.h"
 #import "ViewController.h"
+#import "RestaurantManager.h"
+
 
 @interface AddWaiterVC ()
 
+@property (nonatomic, retain) Restaurant *currentRes;
 @property (weak, nonatomic) IBOutlet UITextField *nameField;
 - (IBAction)saveBtn:(id)sender;
 
@@ -26,6 +29,7 @@
     [super viewDidLoad];
     
     _appDelegate = (AppDelegate *)[[UIApplication sharedApplication] delegate];
+    _currentRes = [[RestaurantManager sharedManager]currentRestaurant];
     
     
 }
@@ -44,20 +48,22 @@ NSError *error = nil;
     
     if (![_nameField.text isEqualToString:@""]) {
         
-        NSEntityDescription *restaurantEntity = [NSEntityDescription entityForName:@"Restaurant" inManagedObjectContext:_appDelegate.managedObjectContext];
+        //NSEntityDescription *restaurantEntity = [NSEntityDescription entityForName:@"Restaurant" inManagedObjectContext:_appDelegate.managedObjectContext];
         NSEntityDescription *waiterEntity = [NSEntityDescription entityForName:@"Waiter" inManagedObjectContext:_appDelegate.managedObjectContext];
         
-        Restaurant *aRestaurant = [[Restaurant alloc] initWithEntity:restaurantEntity insertIntoManagedObjectContext:_appDelegate.managedObjectContext];
-        Waiter *initialWaiter = [[Waiter alloc] initWithEntity:waiterEntity insertIntoManagedObjectContext:_appDelegate.managedObjectContext];
-        initialWaiter.name = _nameField.text;
+        Restaurant *aRestaurant = _currentRes;
+        
+        
+        
+        Waiter *newWaiter = [[Waiter alloc] initWithEntity:waiterEntity insertIntoManagedObjectContext:_appDelegate.managedObjectContext];
+        newWaiter.name = _nameField.text;
         NSLog(@"COME TO SAVING");
-        [aRestaurant addStaffObject:initialWaiter];
+        [aRestaurant addStaffObject:newWaiter];
         [_appDelegate.managedObjectContext save:&error];
         
         _nameField.text =@"";
-
-        UIViewController * lvc = (UIViewController *)[self.storyboard instantiateViewControllerWithIdentifier:@"MainViewController"];
-        [self.navigationController pushViewController:lvc animated:YES];
+        
+        [self.navigationController popToRootViewControllerAnimated:YES];
         
         
         

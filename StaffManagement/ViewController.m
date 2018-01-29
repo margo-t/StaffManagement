@@ -25,9 +25,11 @@ static NSString * const kCellIdentifier = @"CellIdentifier";
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+    NSLog(@"viewDidLoad");
     [self.tableView registerClass:[UITableViewCell class] forCellReuseIdentifier:kCellIdentifier];
     NSSortDescriptor *sortByName = [[NSSortDescriptor alloc]initWithKey:@"name" ascending:YES];
     self.waiters = [[[RestaurantManager sharedManager]currentRestaurant].staff sortedArrayUsingDescriptors:@[sortByName]];
+    NSLog(@"%lu", (unsigned long)self.waiters.count);
     // Do any additional setup after loading the view, typically from a nib.
 }
 

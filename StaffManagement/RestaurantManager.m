@@ -49,9 +49,7 @@
             
             Waiter *initialWaiter = [[Waiter alloc]initWithEntity:waiterEntity insertIntoManagedObjectContext:appDelegate.managedObjectContext];
             initialWaiter.name = NSLocalizedString(@"John Smith", nil);
-            NSLog(@"COME TO SAVING?");
             [aRestaurant addStaffObject:initialWaiter];
-            
             [appDelegate.managedObjectContext save:&error];
         }
         self.restaurant = aRestaurant;
