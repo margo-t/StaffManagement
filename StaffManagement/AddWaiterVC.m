@@ -30,8 +30,7 @@
     
     _appDelegate = (AppDelegate *)[[UIApplication sharedApplication] delegate];
     _currentRes = [[RestaurantManager sharedManager]currentRestaurant];
-    
-    
+
 }
 
 - (void)didReceiveMemoryWarning {
@@ -57,9 +56,8 @@ NSError *error = nil;
         [aRestaurant addStaffObject:newWaiter];
         [_appDelegate.managedObjectContext save:&error];
         
-        [[NSNotificationCenter defaultCenter] postNotificationName:@"reload_data" object:self];
-        
         _nameField.text =@"";
+        [[NSNotificationCenter defaultCenter] postNotificationName:@"reload_data" object:self];
         
         [self.navigationController popToRootViewControllerAnimated:YES];
         

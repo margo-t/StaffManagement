@@ -8,12 +8,15 @@
 
 #import <Foundation/Foundation.h>
 #import <CoreData/CoreData.h>
+#import "AppDelegate.h"
+
 
 
 @interface Restaurant : NSManagedObject
 
 @property (nonatomic, retain) NSString * name;
 @property (nonatomic, retain) NSSet *staff;
+@property(weak,nonatomic)AppDelegate *appDelegate;
 @end
 
 @interface Restaurant (CoreDataGeneratedAccessors)

@@ -13,12 +13,17 @@
 #import "AddWaiterVC.h"
 
 
+
 static NSString * const kCellIdentifier = @"CellIdentifier";
 
 
 @interface ViewController ()
+
 @property IBOutlet UITableView *tableView;
 @property (nonatomic, retain) NSArray *waiters;
+@property (nonatomic) NSInteger path;
+@property (nonatomic, retain) Restaurant *currentRes;
+
 @end
 
 @implementation ViewController
@@ -26,6 +31,7 @@ static NSString * const kCellIdentifier = @"CellIdentifier";
 - (void)viewDidLoad {
     [super viewDidLoad];
     NSLog(@"viewDidLoad");
+    
     [self.tableView registerClass:[UITableViewCell class] forCellReuseIdentifier:kCellIdentifier];
     NSSortDescriptor *sortByName = [[NSSortDescriptor alloc]initWithKey:@"name" ascending:YES];
     self.waiters = [[[RestaurantManager sharedManager]currentRestaurant].staff sortedArrayUsingDescriptors:@[sortByName]];
@@ -70,6 +76,8 @@ static NSString * const kCellIdentifier = @"CellIdentifier";
     UITableViewRowAction *button = [UITableViewRowAction rowActionWithStyle:UITableViewRowActionStyleDefault title:@"Delete" handler:^(UITableViewRowAction *action, NSIndexPath *indexPath)
                                     {
                                         NSLog(@"Action to perform with Button 1");
+                                        NSLog(@"%ld", (long)indexPath.item);
+                                        _path = indexPath.item;
                                         UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Wait" message:@"Are you sure you want to delete?  This action cannot be undone." delegate:self cancelButtonTitle:@"Cancel" otherButtonTitles:@"Delete", nil];
                                         [alert show];
                                     }];
@@ -81,7 +89,14 @@ static NSString * const kCellIdentifier = @"CellIdentifier";
 
 - (void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex{
     if (buttonIndex == 1){
-        //delete it
+        
+//      delete it
+        
+        Restaurant *aRestaurant = [[RestaurantManager sharedManager]currentRestaurant];
+        Waiter *newWaiter = self.waiters[_path];
+
+        [aRestaurant removeStaffObject:newWaiter];
+        
         
     }
 }
