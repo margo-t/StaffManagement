@@ -94,10 +94,15 @@ class ScheduleTableVC: UIViewController, UITableViewDelegate, UITableViewDataSou
         //NSSortDescriptor *sortByName = [[NSSortDescriptor alloc]initWithKey:@"name" ascending:YES];
         //self.waiters = [[[RestaurantManager sharedManager]currentRestaurant].staff sortedArrayUsingDescriptors:@[sortByName]];
         
+        //Shift.
+        
         let fetchRequest: NSFetchRequest<Shift> = Shift.fetchRequest()
         let dateSort = NSSortDescriptor(key: "startTime", ascending: false)
         fetchRequest.sortDescriptors = [dateSort]
+        let waiterShiftsPredicate = NSPredicate(format: "waiterName == %@", (currentWaiter?.name)!)
+        fetchRequest.predicate = waiterShiftsPredicate
         
+        //currentWaiter?.toShift?.
         let controller = NSFetchedResultsController(fetchRequest: fetchRequest, managedObjectContext: (appDelegate?.managedObjectContext)!, sectionNameKeyPath: nil, cacheName: nil)
         
         controller.delegate = self
@@ -227,28 +232,24 @@ class ScheduleTableVC: UIViewController, UITableViewDelegate, UITableViewDataSou
         let dateFormatterGet = DateFormatter()
         dateFormatterGet.dateFormat = "yyyy-MM-dd hh:mm:ss"
         
-        //let
-        
         let context = (appDelegate?.managedObjectContext)!
-        
-        //NSEntityDescription *waiterEntity = [NSEntityDescription entityForName:@"Waiter" inManagedObjectContext:_appDelegate.managedObjectContext];
-        //let *aWaiter = Waiter()
         
         
         let entity = NSEntityDescription.entity(forEntityName: "Shift", in: context)!
         let shift = Shift(entity: entity, insertInto: context)
-        //MyManagedObject *obj = [[MyManagedObject alloc] initWithEntity:[NSEntityDescription entityForName:@"MyManagedObject" inManagedObjectContext:context] insertIntoManagedObjectContext:context];
 
-//        let shift = Shift(entity: NSEntityDescription.entity(forEntityName: "Shift", in: context) ?? NSEntityDescription(), insertInto: context)
-        
-        //print(NSStringFromClass(shift.cl))
-        //shift.toWaiter =
         shift.startTime = dateFormatterGet.date(from: "2016-02-29 12:24:26")
         shift.endTime = dateFormatterGet.date(from: "2016-02-29 16:24:26")
-
-        //[aRestaurant addStaffObject:newWaiter];
+        shift.waiterName = currentWaiter?.name
+        
+        let shift2 = Shift(entity: entity, insertInto: context)
+        
+        shift2.startTime = dateFormatterGet.date(from: "2015-02-01 12:24:26")
+        shift2.endTime = dateFormatterGet.date(from: "2015-02-01 16:24:26")
+        shift2.waiterName = currentWaiter?.name
         
         currentWaiter!.add(toShiftObject: shift)
+        currentWaiter!.add(toShiftObject: shift2)
         
         appDelegate?.saveContext()
         print(currentWaiter?.toShift?.count ?? 0);
