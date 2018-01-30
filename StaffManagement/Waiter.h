@@ -10,10 +10,12 @@
 #import <CoreData/CoreData.h>
 
 @class Restaurant;
+@class Shift;
 
 @interface Waiter : NSManagedObject
 
 @property (nonatomic, retain) NSString * name;
 @property (nonatomic, retain) Restaurant *restaurant;
+@property (nonatomic, retain) Shift *shift;
 
 @end

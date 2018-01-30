@@ -12,12 +12,10 @@ class ScheduleTableVC: UIViewController {
 
     @IBOutlet weak var testLabel: UILabel!
     public var titleName: String = "Nho"
-   // public var currentWaiter: Waiter = Waiter()
-    
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        testLabel.text = titleName
+        //testLabel.text = titleName
 
     }
 

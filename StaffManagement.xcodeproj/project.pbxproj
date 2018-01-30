@@ -20,6 +20,8 @@
 		651CBBDD1AB4E4A100F265E8 /* Waiter.m in Sources */ = {isa = PBXBuildFile; fileRef = 651CBBDC1AB4E4A100F265E8 /* Waiter.m */; };
 		8D64BA4B201BF843003C5184 /* AddWaiterVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 8D64BA4A201BF843003C5184 /* AddWaiterVC.m */; };
 		8D704486201F77BF00D3EF47 /* ScheduleTableVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8D704485201F77BF00D3EF47 /* ScheduleTableVC.swift */; };
+		8D765BCA201FF73800E789D5 /* Shift+CoreDataClass.m in Sources */ = {isa = PBXBuildFile; fileRef = 8D765BC8201FF73800E789D5 /* Shift+CoreDataClass.m */; };
+		8D765BCB201FF73800E789D5 /* Shift+CoreDataProperties.m in Sources */ = {isa = PBXBuildFile; fileRef = 8D765BC9201FF73800E789D5 /* Shift+CoreDataProperties.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -57,6 +59,10 @@
 		8D64BA4A201BF843003C5184 /* AddWaiterVC.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AddWaiterVC.m; sourceTree = "<group>"; };
 		8D704484201F77BE00D3EF47 /* StaffManagement-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "StaffManagement-Bridging-Header.h"; sourceTree = "<group>"; };
 		8D704485201F77BF00D3EF47 /* ScheduleTableVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScheduleTableVC.swift; sourceTree = "<group>"; };
+		8D765BC6201FF73800E789D5 /* Shift+CoreDataProperties.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "Shift+CoreDataProperties.h"; sourceTree = "<group>"; };
+		8D765BC7201FF73800E789D5 /* Shift+CoreDataClass.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "Shift+CoreDataClass.h"; sourceTree = "<group>"; };
+		8D765BC8201FF73800E789D5 /* Shift+CoreDataClass.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = "Shift+CoreDataClass.m"; sourceTree = "<group>"; };
+		8D765BC9201FF73800E789D5 /* Shift+CoreDataProperties.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = "Shift+CoreDataProperties.m"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -146,6 +152,10 @@
 				651CBBDC1AB4E4A100F265E8 /* Waiter.m */,
 				651CBBD81AB4E4A000F265E8 /* Restaurant.h */,
 				651CBBD91AB4E4A000F265E8 /* Restaurant.m */,
+				8D765BC6201FF73800E789D5 /* Shift+CoreDataProperties.h */,
+				8D765BC7201FF73800E789D5 /* Shift+CoreDataClass.h */,
+				8D765BC8201FF73800E789D5 /* Shift+CoreDataClass.m */,
+				8D765BC9201FF73800E789D5 /* Shift+CoreDataProperties.m */,
 			);
 			name = "Core Data";
 			sourceTree = "<group>";
@@ -267,10 +277,12 @@
 			files = (
 				651CBBD71AB4E31400F265E8 /* RestaurantManager.m in Sources */,
 				651CBBB51AB4E1CD00F265E8 /* StaffManagement.xcdatamodeld in Sources */,
+				8D765BCB201FF73800E789D5 /* Shift+CoreDataProperties.m in Sources */,
 				651CBBB21AB4E1CC00F265E8 /* AppDelegate.m in Sources */,
 				651CBBB81AB4E1CD00F265E8 /* ViewController.m in Sources */,
 				651CBBDD1AB4E4A100F265E8 /* Waiter.m in Sources */,
 				651CBBDA1AB4E4A000F265E8 /* Restaurant.m in Sources */,
+				8D765BCA201FF73800E789D5 /* Shift+CoreDataClass.m in Sources */,
 				8D64BA4B201BF843003C5184 /* AddWaiterVC.m in Sources */,
 				8D704486201F77BF00D3EF47 /* ScheduleTableVC.swift in Sources */,
 				651CBBAF1AB4E1CC00F265E8 /* main.m in Sources */,
