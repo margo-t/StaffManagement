@@ -4,5 +4,7 @@
 
 #import "ViewController.h"
 #import "AppDelegate.h"
-#import "Waiter.h"
+#import "Waiter+CoreDataClass.h"
 #import "Restaurant.h"
+#import "Shift+CoreDataClass.h"
+#import "RestaurantManager.h"

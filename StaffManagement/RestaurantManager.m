@@ -8,7 +8,8 @@
 
 #import "RestaurantManager.h"
 #import "AppDelegate.h"
-#import "Waiter.h"
+#import "Waiter+CoreDataClass.h"
+#import "Waiter+CoreDataProperties.h"
 #import "Restaurant.h"
 @interface RestaurantManager()
 @property (nonatomic, retain) Restaurant *restaurant;
@@ -23,6 +24,7 @@
     });
     return sharedManager;
 }
+
 -(Restaurant*)currentRestaurant{
     if(self.restaurant == nil)
     {
@@ -56,4 +58,5 @@
     }
     return self.restaurant;
 }
+
 @end

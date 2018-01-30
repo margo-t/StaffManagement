@@ -9,7 +9,7 @@
 #import "ViewController.h"
 #import "Restaurant.h"
 #import "RestaurantManager.h"
-#import "Waiter.h"
+#import "Waiter+CoreDataClass.h"
 #import "AddWaiterVC.h"
 #import "StaffManagement-Swift.h"
 
@@ -79,13 +79,13 @@ static NSString * const kCellIdentifier = @"WaiterCellIdentifier";
 
         if ([[segue identifier] isEqualToString:@"toSchedule"])
         {
-            
             NSIndexPath *indexPath = [self.tableView indexPathForSelectedRow];
             ScheduleTableVC *destViewController = (ScheduleTableVC*)segue.destinationViewController;
 
             Waiter *waiter = self.waiters[indexPath.row];
+            destViewController.currentWaiter = waiter;
             destViewController.title = waiter.name;
-            destViewController.titleName = waiter.name;
+            //destViewController.titleName = waiter.name;
 
         }
 }

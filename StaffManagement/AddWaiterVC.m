@@ -8,7 +8,7 @@
 
 #import "AddWaiterVC.h"
 
-#import "Waiter.h"
+#import "Waiter+CoreDataClass.h"
 #import "Restaurant.h"
 #import "ViewController.h"
 #import "RestaurantManager.h"
@@ -46,6 +46,7 @@ NSError *error = nil;
         newWaiter.name = _nameField.text;
         NSLog(@"COME TO SAVING");
         [aRestaurant addStaffObject:newWaiter];
+    
         [_appDelegate.managedObjectContext save:&error];
         
         _nameField.text =@"";
