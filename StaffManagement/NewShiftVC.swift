@@ -41,7 +41,7 @@ class NewShiftVC: ViewController {
             
             appDelegate2.saveContext()
             print(currentWaiter?.toShift?.count ?? 0);
-             
+            
             NotificationCenter.default.post(name: NSNotification.Name("reload_data"), object: self)
             navigationController?.popViewController(animated: true)
         }
@@ -103,6 +103,7 @@ class NewShiftVC: ViewController {
         
         //Formate Time
         timePicker.datePickerMode = .time
+        timePicker.minuteInterval = 15
 
         //ToolBar
         let toolbar = UIToolbar();
@@ -123,8 +124,8 @@ class NewShiftVC: ViewController {
         
         //Formate Time
         timePicker2.datePickerMode = .time
+        timePicker2.minuteInterval = 15
         timePicker2.timeZone = NSTimeZone.local
-        timePicker2.minimumDate = startTime
         
         //ToolBar
         let toolbar = UIToolbar();
@@ -167,12 +168,25 @@ class NewShiftVC: ViewController {
         
         if (startLabel.text != "") {
             
+            
+            
             let formatter = DateFormatter()
             formatter.dateFormat = "HH:mm"
             finishLabel.text = formatter.string(from: timePicker2.date)
             endTime = getShift(givenDate: dateLabel.text!, givenTime: finishLabel.text!)
+            
             print(endTime)
-            self.view.endEditing(true)
+            
+            if endTime>startTime{
+                self.view.endEditing(true)
+            }
+            else {
+                let alert = UIAlertController(title: "Warning!", message: "Shift can't end before starting", preferredStyle: UIAlertControllerStyle.alert)
+                alert.addAction(UIAlertAction(title: "OK", style: UIAlertActionStyle.default, handler: nil))
+                self.present(alert, animated: true, completion: nil)
+                self.view.endEditing(true)
+            }
+            
         }
         else {
             let alert = UIAlertController(title: "Warning!", message: "Add start time first", preferredStyle: UIAlertControllerStyle.alert)
