@@ -21,12 +21,29 @@ class NewShiftVC: ViewController {
     var startTime = Date()
     var endTime = Date()
     
+    var currentWaiter:  Waiter?
+    var appDelegate2 = UIApplication.shared.delegate as! AppDelegate
     
     @IBAction func saveShiftLabel(_ sender: Any) {
         
         if (dateLabel.text != "" && startLabel.text != "" && finishLabel.text != "") {
+            
+            let context = (appDelegate2.managedObjectContext)
+            
+            let entity = NSEntityDescription.entity(forEntityName: "Shift", in: context!)
+            let shift = Shift(entity: entity!, insertInto: context)
+            
+            shift.startTime = startTime
+            shift.endTime = endTime
+            shift.waiterName = currentWaiter?.name
+            
+            currentWaiter!.add(toShiftObject: shift)
+            
+            appDelegate2.saveContext()
+            print(currentWaiter?.toShift?.count ?? 0);
+             
             NotificationCenter.default.post(name: NSNotification.Name("reload_data"), object: self)
-            navigationController?.popToRootViewController(animated: true)
+            navigationController?.popViewController(animated: true)
         }
         else {
             let alert = UIAlertController(title: "Warning!", message: "All fields must contain text", preferredStyle: UIAlertControllerStyle.alert)
@@ -37,16 +54,21 @@ class NewShiftVC: ViewController {
         
     }
     
+    
+
+    
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
         showDatePicker()
         showTimePicker()
         showEndTimePicker()
+        
+        print("viewDidLoad - NewShiftVC")
+        print(currentWaiter?.name ?? "nho")
     }
     
-    
-
     
     func showDatePicker(){
         //Formate Date

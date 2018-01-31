@@ -23,6 +23,8 @@ class ScheduleTableVC: UIViewController, UITableViewDelegate, UITableViewDataSou
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        NotificationCenter.default.post(name: NSNotification.Name("reload_data"), object: self)
+        
         tableView.delegate = self
         tableView.dataSource = self
         
@@ -32,9 +34,22 @@ class ScheduleTableVC: UIViewController, UITableViewDelegate, UITableViewDataSou
         print(currentWaiter!.name ?? "non?")
         
         //generateTestData()
+        }
+    
+    @IBAction func toNewShift(_ sender: UIBarButtonItem) {
         
+        print("button to toNewShift")
+        performSegue(withIdentifier: "toNewShift", sender: self)
+    }
+    
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if "toNewShift" == segue.identifier {
+            
+            print("prepareForSegue2")
+            let yourNextViewController = (segue.destination as! NewShiftVC)
+            yourNextViewController.currentWaiter = currentWaiter
+        }
 
-        
     }
     
     //set up table view controller
@@ -201,18 +216,7 @@ class ScheduleTableVC: UIViewController, UITableViewDelegate, UITableViewDataSou
         shift.endTime = dateFormatterGet.date(from: "2018-02-05 16:00:00")
         shift.waiterName = currentWaiter?.name
         
-//        shift.startTime = dateFormatterGet.date(from: "2018-01-28 07:00:00")
-//        shift.endTime = dateFormatterGet.date(from: "2018-01-28 11:00:00")
-//        shift.waiterName = currentWaiter?.name
-        
-//        let shift2 = Shift(entity: entity, insertInto: context)
-//
-//        shift2.startTime = dateFormatterGet.date(from: "2015-02-01 12:24:26")
-//        shift2.endTime = dateFormatterGet.date(from: "2015-02-01 16:24:26")
-//        shift2.waiterName = currentWaiter?.name
-        
         currentWaiter!.add(toShiftObject: shift)
-        //currentWaiter!.add(toShiftObject: shift2)
         
         appDelegate?.saveContext()
         print(currentWaiter?.toShift?.count ?? 0);

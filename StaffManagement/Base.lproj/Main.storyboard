@@ -250,7 +250,8 @@
                     <navigationItem key="navigationItem" title="Schedule" id="Qrc-9j-ePX">
                         <barButtonItem key="rightBarButtonItem" systemItem="add" id="pTl-4d-ySe">
                             <connections>
-                                <segue destination="EgS-3t-lyG" kind="show" id="UU3-gG-0aT"/>
+                                <action selector="toNewShift:" destination="u14-IP-2j7" id="Xwz-me-sN1"/>
+                                <segue destination="EgS-3t-lyG" kind="show" identifier="toNewShift" id="kfp-7R-h9u"/>
                             </connections>
                         </barButtonItem>
                     </navigationItem>
