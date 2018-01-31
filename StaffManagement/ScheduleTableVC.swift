@@ -28,7 +28,7 @@ class ScheduleTableVC: UIViewController, UITableViewDelegate, UITableViewDataSou
         tableView.delegate = self
         tableView.dataSource = self
         
-        attemptFetch()
+        attemptFetch(segmentType: "future")
         
         print("Current Waiter")
         print(currentWaiter!.name ?? "non?")
@@ -36,6 +36,28 @@ class ScheduleTableVC: UIViewController, UITableViewDelegate, UITableViewDataSou
         //generateTestData()
         }
     
+    
+    
+    @IBAction func segmentByTime(_ sender: Any) {
+        switch segment.selectedSegmentIndex
+        {
+            case 0:
+                print("First Segment Selected")
+                attemptFetch(segmentType: "future")
+            tableView.reloadData()
+            
+            
+            case 1:
+                print("Second Segment Selected")
+                attemptFetch(segmentType: "past")
+            tableView.reloadData()
+            
+            
+            default:
+            break
+        }
+        
+    }
     @IBAction func toNewShift(_ sender: UIBarButtonItem) {
         
         print("button to toNewShift")
@@ -101,16 +123,29 @@ class ScheduleTableVC: UIViewController, UITableViewDelegate, UITableViewDataSou
     
     
     //connect to core data
-    func attemptFetch() {
+    func attemptFetch(segmentType: String) {
         
         // request for all Shifts and ordered by start time
         let fetchRequest: NSFetchRequest<Shift> = Shift.fetchRequest()
-        let dateSort = NSSortDescriptor(key: "startTime", ascending: false)
+        let dateSort = NSSortDescriptor(key: "startTime", ascending: true)
         fetchRequest.sortDescriptors = [dateSort]
         
         //sort out shifts belonging to the current waiter name
         let waiterShiftsPredicate = NSPredicate(format: "waiterName == %@", (currentWaiter?.name)!)
         fetchRequest.predicate = waiterShiftsPredicate
+        
+        if (segmentType == "future"){
+            print("type future")
+            let shiftsPredicate = NSPredicate(format: "startTime > %@", Date() as CVarArg)
+            let additionalPredicate = NSCompoundPredicate(type: NSCompoundPredicate.LogicalType.and, subpredicates: [waiterShiftsPredicate, shiftsPredicate])
+            fetchRequest.predicate = additionalPredicate
+        } 
+        else {
+             print("type past")
+            let pastShiftsPredicate = NSPredicate(format: "startTime < %@", Date() as CVarArg)
+            let additionalPredicate = NSCompoundPredicate(type: NSCompoundPredicate.LogicalType.and, subpredicates: [waiterShiftsPredicate, pastShiftsPredicate])
+            fetchRequest.predicate = additionalPredicate
+        }
 
         let controller = NSFetchedResultsController(fetchRequest: fetchRequest, managedObjectContext: (appDelegate?.managedObjectContext)!, sectionNameKeyPath: nil, cacheName: nil)
         
