@@ -38,11 +38,12 @@ static NSString * const kCellIdentifier = @"WaiterCellIdentifier";
     self.waiters = [[[RestaurantManager sharedManager]currentRestaurant].staff sortedArrayUsingDescriptors:@[sortByName]];
     NSLog(@"%lu", (unsigned long)self.waiters.count);
     
+    //add observer to fetch and reload data
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(handle_data) name:@"reload_data" object:nil];
     
 }
 
-
+//fetch and reload data
 -(void)handle_data {
     NSSortDescriptor *sortByName = [[NSSortDescriptor alloc]initWithKey:@"name" ascending:YES];
     self.waiters = [[[RestaurantManager sharedManager]currentRestaurant].staff sortedArrayUsingDescriptors:@[sortByName]];
@@ -50,10 +51,7 @@ static NSString * const kCellIdentifier = @"WaiterCellIdentifier";
     NSLog(@"reload");
 }
 
-- (void)didReceiveMemoryWarning {
-    [super didReceiveMemoryWarning];
-    // Dispose of any resources that can be recreated.
-}
+
 #pragma mark - TableView Data Source
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
     return 1;
@@ -71,7 +69,7 @@ static NSString * const kCellIdentifier = @"WaiterCellIdentifier";
 }
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath* )indexPath{
-    //NSObject *post = [self.waiters[indexPath.row] objectAtIndex:indexPath.row];
+    
     [self performSegueWithIdentifier:@"toSchedule" sender:indexPath];
 }
 
@@ -82,10 +80,10 @@ static NSString * const kCellIdentifier = @"WaiterCellIdentifier";
             NSIndexPath *indexPath = [self.tableView indexPathForSelectedRow];
             ScheduleTableVC *destViewController = (ScheduleTableVC*)segue.destinationViewController;
 
+            //pass current waiter obj
             Waiter *waiter = self.waiters[indexPath.row];
             destViewController.currentWaiter = waiter;
             destViewController.title = waiter.name;
-            //destViewController.titleName = waiter.name;
 
         }
 }
@@ -118,7 +116,6 @@ static NSString * const kCellIdentifier = @"WaiterCellIdentifier";
 
         [aRestaurant removeStaffObject:newWaiter];
         
-        
     }
 }
 
@@ -130,7 +127,5 @@ static NSString * const kCellIdentifier = @"WaiterCellIdentifier";
 {
     return YES; //tableview must be editable
 }
-
-
 
 @end

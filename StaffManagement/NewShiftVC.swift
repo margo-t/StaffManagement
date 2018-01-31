@@ -42,7 +42,6 @@ class NewShiftVC: ViewController {
             appDelegate2.saveContext()
             print(currentWaiter?.toShift?.count ?? 0);
             
-            NotificationCenter.default.post(name: NSNotification.Name("reload_data"), object: self)
             navigationController?.popViewController(animated: true)
         }
         else {
@@ -54,10 +53,6 @@ class NewShiftVC: ViewController {
         
     }
     
-    
-
-    
-    
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -65,13 +60,11 @@ class NewShiftVC: ViewController {
         showTimePicker()
         showEndTimePicker()
         
-        print("viewDidLoad - NewShiftVC")
-        print(currentWaiter?.name ?? "nho")
     }
     
-    
+    //format picker to select date
     func showDatePicker(){
-        //Formate Date
+        //specify type of picker
         datePicker.datePickerMode = .date
         
         let today = NSDate()
@@ -98,10 +91,10 @@ class NewShiftVC: ViewController {
     }
     
 
-    
+    //format picker to select start time
     func showTimePicker(){
         
-        //Formate Time
+        //specify type of picker
         timePicker.datePickerMode = .time
         timePicker.minuteInterval = 15
 
@@ -120,9 +113,10 @@ class NewShiftVC: ViewController {
         
     }
     
+    //format picker to select end time
     func showEndTimePicker(){
         
-        //Formate Time
+        //specify type of picker
         timePicker2.datePickerMode = .time
         timePicker2.minuteInterval = 15
         timePicker2.timeZone = NSTimeZone.local
@@ -145,6 +139,7 @@ class NewShiftVC: ViewController {
     
     func doneStartPicker(){
         
+        //check that the date already picked to save full proper startTime(going to db)
         if (dateLabel.text != "") {
             
             let formatter = DateFormatter()
@@ -166,9 +161,8 @@ class NewShiftVC: ViewController {
     
     func doneFinishPicker(){
         
+         //check that the start time already picked for logic checks(see next comment)
         if (startLabel.text != "") {
-            
-            
             
             let formatter = DateFormatter()
             formatter.dateFormat = "HH:mm"
@@ -177,6 +171,7 @@ class NewShiftVC: ViewController {
             
             print(endTime)
             
+            //make sure end time is later than beginning
             if endTime>startTime{
                 self.view.endEditing(true)
             }
@@ -211,6 +206,7 @@ class NewShiftVC: ViewController {
         self.view.endEditing(true)
     }
 
+    // get full Date from given day and time
     func getShift(givenDate: String, givenTime: String) -> Date
     {
         let composedDate = givenDate+" "+givenTime
@@ -220,12 +216,5 @@ class NewShiftVC: ViewController {
         let dateTime = formatter.date(from: composedDate)
         
         return dateTime!
-    }
-}
-
-extension Date {
-    
-    var localTime: String {
-        return description(with: NSLocale.current)
     }
 }

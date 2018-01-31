@@ -42,16 +42,18 @@ NSError *error = nil;
         NSEntityDescription *waiterEntity = [NSEntityDescription entityForName:@"Waiter" inManagedObjectContext:_appDelegate.managedObjectContext];
         Restaurant *aRestaurant = _currentRes;
         
+        //add waiter object
         Waiter *newWaiter = [[Waiter alloc] initWithEntity:waiterEntity insertIntoManagedObjectContext:_appDelegate.managedObjectContext];
         newWaiter.name = _nameField.text;
-        NSLog(@"COME TO SAVING");
+        
+        //add waiter to current restaurant
         [aRestaurant addStaffObject:newWaiter];
     
         [_appDelegate.managedObjectContext save:&error];
-        
         _nameField.text =@"";
-        [[NSNotificationCenter defaultCenter] postNotificationName:@"reload_data" object:self];
         
+        //send notification to update the view
+        [[NSNotificationCenter defaultCenter] postNotificationName:@"reload_data" object:self];
         [self.navigationController popToRootViewControllerAnimated:YES];
         
         

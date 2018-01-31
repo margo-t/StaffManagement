@@ -23,8 +23,6 @@ class ScheduleTableVC: UIViewController, UITableViewDelegate, UITableViewDataSou
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        NotificationCenter.default.post(name: NSNotification.Name("reload_data"), object: self)
-        
         tableView.delegate = self
         tableView.dataSource = self
         
@@ -44,13 +42,13 @@ class ScheduleTableVC: UIViewController, UITableViewDelegate, UITableViewDataSou
             case 0:
                 print("First Segment Selected")
                 attemptFetch(segmentType: "future")
-            tableView.reloadData()
+                tableView.reloadData()
             
             
             case 1:
                 print("Second Segment Selected")
                 attemptFetch(segmentType: "past")
-            tableView.reloadData()
+                tableView.reloadData()
             
             
             default:
@@ -77,15 +75,8 @@ class ScheduleTableVC: UIViewController, UITableViewDelegate, UITableViewDataSou
     //set up table view controller
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         
+        //set up link to custom view cell here
         let cell = tableView.dequeueReusableCell(withIdentifier: "ShiftCell", for: indexPath) as! ShiftCell
-        
-        //closure for shift
-//        let shift = contr.object(at: (indexPath as NSIndexPath) as IndexPath)
-//        cell.completedAction = { (self) in
-//            cell.updateCompletion(shift: shift)
-//        }
-
-
         configureCell(cell: cell, indexPath: indexPath as NSIndexPath)
         return cell
     }
@@ -95,31 +86,6 @@ class ScheduleTableVC: UIViewController, UITableViewDelegate, UITableViewDataSou
         let shift = controller.object(at: indexPath as IndexPath)
         cell.configureCell(shift: shift)
     }
-    
-    //Navigation
-    
-//    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-//        if let obj = controller.fetchedObjects , obj.count > 0 {
-//
-//            let task = obj[indexPath.row]
-//            performSegue(withIdentifier: "TaskDetailsVC", sender: task)
-//
-//        }
-//    }
-//
-//    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-//        if segue.identifier == "TaskDetailsVC" {
-//
-//            if let destination = segue.destination as? TaskDetailsViewController {
-//
-//                if let task = sender as? Task {
-//                    destination.taskToEdit = task
-//                }
-//            }
-//
-//        }
-//    }
-    
     
     
     //connect to core data
@@ -134,6 +100,7 @@ class ScheduleTableVC: UIViewController, UITableViewDelegate, UITableViewDataSou
         let waiterShiftsPredicate = NSPredicate(format: "waiterName == %@", (currentWaiter?.name)!)
         fetchRequest.predicate = waiterShiftsPredicate
         
+        //view upcoming or past shifts
         if (segmentType == "future"){
             print("type future")
             let shiftsPredicate = NSPredicate(format: "startTime > %@", Date() as CVarArg)
