@@ -30,20 +30,27 @@ class ShiftCell: UITableViewCell {
     
     func configureCell(shift: Shift) {
         
-        let formatter = DateFormatter()
-        formatter.dateFormat = "yyyy-MM-dd HH:mm:ss"
-        let myString = formatter.string(from: shift.startTime!)
-        // convert your string to date
-        let yourDate = formatter.date(from: myString)
-        //then again set the date format whhich type of output you need
-        formatter.dateFormat = "dd-MMM-yyyy"
-        // again convert your date to string
-        let myStringafd = formatter.string(from: yourDate!)
+        let startTime = shift.startTime!
+        
+        let finishTime = shift.endTime!
         
         
-        
-        startShiftLabel.text = myStringafd
-        //EndShiftLabel.text = shift.endTime
+        DateLabel.text = startTime.toString(dateFormat: "dd")
+        MonthLabel.text = startTime.toString(dateFormat: "MMMM")
+        DOWLabel.text = startTime.toString(dateFormat: "E")
+        startShiftLabel.text = startTime.toString(dateFormat: "HH:mm")
+        EndShiftLabel.text = finishTime.toString(dateFormat: "HH:mm")
+    }
+
+}
+
+extension Date
+{
+    func toString( dateFormat format  : String ) -> String
+    {
+        let dateFormatter = DateFormatter()
+        dateFormatter.dateFormat = format
+        return dateFormatter.string(from: self)
     }
 
 }

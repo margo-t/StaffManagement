@@ -23,6 +23,7 @@
 		8D5747802020F76100B895EA /* Waiter+CoreDataProperties.m in Sources */ = {isa = PBXBuildFile; fileRef = 8D57477E2020F76100B895EA /* Waiter+CoreDataProperties.m */; };
 		8D64BA4B201BF843003C5184 /* AddWaiterVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 8D64BA4A201BF843003C5184 /* AddWaiterVC.m */; };
 		8D704486201F77BF00D3EF47 /* ScheduleTableVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8D704485201F77BF00D3EF47 /* ScheduleTableVC.swift */; };
+		8DA054292021FF6700D5CA9B /* NewShiftVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8DA054282021FF6700D5CA9B /* NewShiftVC.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -65,6 +66,7 @@
 		8D64BA4A201BF843003C5184 /* AddWaiterVC.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AddWaiterVC.m; sourceTree = "<group>"; };
 		8D704484201F77BE00D3EF47 /* StaffManagement-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "StaffManagement-Bridging-Header.h"; sourceTree = "<group>"; };
 		8D704485201F77BF00D3EF47 /* ScheduleTableVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScheduleTableVC.swift; sourceTree = "<group>"; };
+		8DA054282021FF6700D5CA9B /* NewShiftVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewShiftVC.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -179,6 +181,7 @@
 				8D64BA4A201BF843003C5184 /* AddWaiterVC.m */,
 				8D704485201F77BF00D3EF47 /* ScheduleTableVC.swift */,
 				8D704484201F77BE00D3EF47 /* StaffManagement-Bridging-Header.h */,
+				8DA054282021FF6700D5CA9B /* NewShiftVC.swift */,
 			);
 			name = VC;
 			sourceTree = "<group>";
@@ -290,6 +293,7 @@
 				651CBBB51AB4E1CD00F265E8 /* StaffManagement.xcdatamodeld in Sources */,
 				8D574769202019B700B895EA /* MaterialView.swift in Sources */,
 				651CBBB21AB4E1CC00F265E8 /* AppDelegate.m in Sources */,
+				8DA054292021FF6700D5CA9B /* NewShiftVC.swift in Sources */,
 				8D5747802020F76100B895EA /* Waiter+CoreDataProperties.m in Sources */,
 				651CBBB81AB4E1CD00F265E8 /* ViewController.m in Sources */,
 				8D57476B20201A7900B895EA /* ShiftCell.swift in Sources */,

@@ -31,7 +31,7 @@ class ScheduleTableVC: UIViewController, UITableViewDelegate, UITableViewDataSou
         print("Current Waiter")
         print(currentWaiter!.name ?? "non?")
         
-        generateTestData()
+        //generateTestData()
         
 
         
@@ -88,21 +88,15 @@ class ScheduleTableVC: UIViewController, UITableViewDelegate, UITableViewDataSou
     //connect to core data
     func attemptFetch() {
         
-//        let context = (UIApplication.shared.delegate as! AppDelegate!).persistentStoreCoordinator.context
-        
-        
-        //NSSortDescriptor *sortByName = [[NSSortDescriptor alloc]initWithKey:@"name" ascending:YES];
-        //self.waiters = [[[RestaurantManager sharedManager]currentRestaurant].staff sortedArrayUsingDescriptors:@[sortByName]];
-        
-        //Shift.
-        
+        // request for all Shifts and ordered by start time
         let fetchRequest: NSFetchRequest<Shift> = Shift.fetchRequest()
         let dateSort = NSSortDescriptor(key: "startTime", ascending: false)
         fetchRequest.sortDescriptors = [dateSort]
+        
+        //sort out shifts belonging to the current waiter name
         let waiterShiftsPredicate = NSPredicate(format: "waiterName == %@", (currentWaiter?.name)!)
         fetchRequest.predicate = waiterShiftsPredicate
-        
-        //currentWaiter?.toShift?.
+
         let controller = NSFetchedResultsController(fetchRequest: fetchRequest, managedObjectContext: (appDelegate?.managedObjectContext)!, sectionNameKeyPath: nil, cacheName: nil)
         
         controller.delegate = self
@@ -115,41 +109,6 @@ class ScheduleTableVC: UIViewController, UITableViewDelegate, UITableViewDataSou
             let error = error as NSError
             print("\(error)")
         }
-
-        
-        
-//        let fetchRequest: NSFetchRequest<Shift> = Shift.fetchRequest()
-//        let dateSort = NSSortDescriptor(key: "created", ascending: false)
-//        fetchRequest.sortDescriptors = [dateSort]
-//
-//        //AppDelegate.saveContext()
-//        //let controller = NSFetchedResultsController(fetchRequest: fetchRequest, managedObjectContext: managedObjectContext, sectionNameKeyPath: nil, cacheName: nil)
-//
-//        controller.delegate = self
-//        self.controller = controller
-        
-//        var aWaiter: Waiter?
-//        var error: Error? = nil
-//        let appDelegate = UIApplication.shared.delegate as? AppDelegate
-//        let request = NSFetchRequest<NSFetchRequestResult>(entityName: "Waiter")
-//        //var results = try appDelegate?.managedObjectContext.fetch(request)
-//
-//        do {
-//            let results = try appDelegate?.managedObjectContext.fetch(request)
-//            let resultsNum = (results?.count)!
-//            if resultsNum > 0 {
-//                print("results.count > 0?")
-//                print("\(UInt(resultsNum))")
-//                aWaiter = results![0] as? Waiter
-//            }
-//
-//        } catch {
-//            let error = error as NSError
-//            print("\(error)")
-//        }
-        
-        
-        
     }
     
     
@@ -230,7 +189,7 @@ class ScheduleTableVC: UIViewController, UITableViewDelegate, UITableViewDataSou
     func generateTestData() {
         
         let dateFormatterGet = DateFormatter()
-        dateFormatterGet.dateFormat = "yyyy-MM-dd hh:mm:ss"
+        dateFormatterGet.dateFormat = "yyyy-MM-dd HH:mm:ss"
         
         let context = (appDelegate?.managedObjectContext)!
         
@@ -238,25 +197,26 @@ class ScheduleTableVC: UIViewController, UITableViewDelegate, UITableViewDataSou
         let entity = NSEntityDescription.entity(forEntityName: "Shift", in: context)!
         let shift = Shift(entity: entity, insertInto: context)
 
-        shift.startTime = dateFormatterGet.date(from: "2016-02-29 12:24:26")
-        shift.endTime = dateFormatterGet.date(from: "2016-02-29 16:24:26")
+        shift.startTime = dateFormatterGet.date(from: "2018-02-05 12:00:00")
+        shift.endTime = dateFormatterGet.date(from: "2018-02-05 16:00:00")
         shift.waiterName = currentWaiter?.name
         
-        let shift2 = Shift(entity: entity, insertInto: context)
+//        shift.startTime = dateFormatterGet.date(from: "2018-01-28 07:00:00")
+//        shift.endTime = dateFormatterGet.date(from: "2018-01-28 11:00:00")
+//        shift.waiterName = currentWaiter?.name
         
-        shift2.startTime = dateFormatterGet.date(from: "2015-02-01 12:24:26")
-        shift2.endTime = dateFormatterGet.date(from: "2015-02-01 16:24:26")
-        shift2.waiterName = currentWaiter?.name
+//        let shift2 = Shift(entity: entity, insertInto: context)
+//
+//        shift2.startTime = dateFormatterGet.date(from: "2015-02-01 12:24:26")
+//        shift2.endTime = dateFormatterGet.date(from: "2015-02-01 16:24:26")
+//        shift2.waiterName = currentWaiter?.name
         
         currentWaiter!.add(toShiftObject: shift)
-        currentWaiter!.add(toShiftObject: shift2)
+        //currentWaiter!.add(toShiftObject: shift2)
         
         appDelegate?.saveContext()
         print(currentWaiter?.toShift?.count ?? 0);
         
     }
     
-
-
-
 }
