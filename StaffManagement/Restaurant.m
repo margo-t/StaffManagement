@@ -9,9 +9,23 @@
 #import "Restaurant.h"
 
 
+
 @implementation Restaurant
 
 @dynamic name;
 @dynamic staff;
+@dynamic appDelegate;
+
+
+- (void)removeStaffObject:(NSManagedObject *)value{
+    NSLog(@"Attempt tp remove");
+    AppDelegate *appDelegate = [[UIApplication sharedApplication] delegate];
+    NSError *error = nil;
+    NSManagedObjectContext *context = [appDelegate managedObjectContext];
+    [context deleteObject:value];
+    [appDelegate.managedObjectContext save:&error];
+    [[NSNotificationCenter defaultCenter] postNotificationName:@"reload_data" object:self];
+}
+
 
 @end
